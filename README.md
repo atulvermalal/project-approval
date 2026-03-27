@@ -132,16 +132,16 @@ Current feature coverage includes:
 
 - auth flow
 - dashboard access
-- project pages
+- project pages 
 - project submission
 - project approval API
 - role and permission management
 
 ## Submission Links
 
-- GitHub repository: `ADD_GITHUB_REPOSITORY_LINK`
-- Demo video: `ADD_DEMO_VIDEO_LINK`
-- Code walkthrough video: `ADD_CODE_WALKTHROUGH_LINK`
+- GitHub repository: `https://github.com/atulvermalal/project-approval`
+- Demo video: `https://www.dropbox.com/scl/fi/mhjt3c5xjroqkdyo4kxzy/ui.mp4?rlkey=37j8d2q0vmy3aqfuacb50epw2&st=kmo8fcjc&dl=0`
+- Code walkthrough video: `https://www.dropbox.com/scl/fi/p9uip4jxsedzms8otns2y/code.mp4?rlkey=j6s256el3zygb5owysef0s5zx&st=0ldvek7z&dl=0`
 
 ## Notes
 
