@@ -1,6 +1,6 @@
 # Project Approval
 
-Project Approval is a Laravel 13 + Bootstrap application for submitting projects, reviewing approvals, managing users and roles, sending email notifications, and exposing protected API endpoints.
+Project Approval is a Laravel 12 + Bootstrap application for submitting projects, reviewing approvals, managing users and roles, sending queued email notifications, and exposing protected API endpoints.
 
 ## Overview
 
@@ -9,7 +9,7 @@ This project was built for a full-stack workflow task where:
 - users submit projects
 - admins approve or reject projects
 - audit logs and approval history are stored
-- email notifications are sent on submission and decision
+- queued email notifications are sent on submission and decision
 - API responses are returned through Laravel API Resources
 - access is protected with role and permission checks
 
@@ -17,30 +17,22 @@ This project was built for a full-stack workflow task where:
 
 - Login and registration with Laravel auth
 - Role-based access control for admin and user workflows
-- Dashboard with summary cards
+- Dashboard with summary cards for admin and user
 - Project submission with file uploads
 - Project listing with filters, history, and bulk approval/rejection
-- Project details page
+- Project details page with attachment view/download
 - Project delete action for allowed records
-- Admin user management:
-  - user index
-  - create user
-  - edit user
-- Admin role management:
-  - role index
-  - create role
-  - edit role
+- Admin user management with separate index, create, and edit pages
+- Admin role management with separate index, create, and edit pages
 - MySQL stored procedure for approval
-- Email notifications for:
-  - project submitted
-  - project approved
-  - project rejected
+- Queued email notifications for project submitted, approved, and rejected events
 - API endpoints using `ProjectResource`
+- Optional real-time notification setup using Laravel Echo + Pusher
 
 ## Tech Stack
 
-- Laravel 13
-- PHP 8.3
+- Laravel 12
+- PHP 8.2
 - Bootstrap 5
 - Blade templates
 - MySQL
@@ -94,6 +86,20 @@ Run a queue worker for queued notifications:
 php artisan queue:work
 ```
 
+If the worker is not running, emails will stay in the `jobs` table until they are processed.
+
+If you want emails to send immediately during local development, you can switch:
+
+```env
+QUEUE_CONNECTION=sync
+```
+
+Then clear config:
+
+```bash
+php artisan config:clear
+```
+
 ## File Access
 
 Uploaded attachments such as PDF and Word files can be viewed or downloaded by authorized users from the project pages.
@@ -110,6 +116,7 @@ composer install
 php artisan migrate --seed
 php artisan storage:link
 php artisan serve
+php artisan queue:work
 ```
 
 ## Environment Notes
@@ -118,7 +125,9 @@ Important `.env` items:
 
 - `APP_NAME="Project Approval"`
 - Gmail SMTP settings for outgoing mail
+- `QUEUE_CONNECTION=database`
 - MySQL database connection
+- Optional Pusher keys for real-time notifications
 
 ## Testing
 
@@ -146,5 +155,7 @@ Current feature coverage includes:
 ## Notes
 
 - Frontend is implemented with Bootstrap and Blade
-- Bonus real-time Echo/Pusher notifications are not included
+- Laravel Echo + Pusher integration is prepared and can be activated by filling the Pusher keys in `.env`
+- If emails are queued but not delivered, make sure `php artisan queue:work` is running
+- If MySQL is not running, login/session and queued jobs can also fail because this app uses database-backed sessions and queue storage
 - If Gmail SMTP authentication fails, verify the app password and Gmail security settings
