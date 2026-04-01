@@ -49,9 +49,7 @@
 
                 <div class="mt-4 pt-4 border-top">
                     <p class="text-muted mb-2">Need an account? <a href="{{ route('register') }}" class="fw-semibold">Register here</a></p>
-                    <div class="small text-muted">Demo accounts</div>
-                    <div class="small mt-1"><strong>Admin:</strong> atulvermalal@gmail.com / password</div>
-                    <div class="small"><strong>User:</strong> vatul7700@gmail.com / password</div>
+                  
                 </div>
             </div>
         </div>
